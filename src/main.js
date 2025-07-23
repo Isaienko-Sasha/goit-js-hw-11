@@ -16,16 +16,6 @@ const searchInput = document.querySelector('.search-input');
 
 form.addEventListener('submit', handleSubmit);
 
-//function populateDatalist(arr) {
-//  return arr
-//  .map(
-//  ({ id, tags }) => `
-//<option value="${tags}" data-id="${id}"></option>
-// `
-// )
-//  .join('');
-//}
-
 function handleSubmit(event) {
   event.preventDefault();
 
@@ -39,8 +29,6 @@ function handleSubmit(event) {
     });
     return;
   }
-    
-    //loader.classList.remove("hidden");
 
 
   clearGallery();
@@ -49,7 +37,7 @@ function handleSubmit(event) {
     getImagesByQuery(myInput)
     .then(data => {
       if (data.hits.length === 0) {
-        iziToast.warning({
+        iziToast.info({
           message: 'No images found. Try a different search term.',
           position: 'topRight',
         });
@@ -60,12 +48,12 @@ function handleSubmit(event) {
         lightbox.refresh();
       }
     })
-    .catch(error => {
-      iziToast.error({
-        message: 'Something went wrong. Please try again later.',
-        position: 'topRight',
-      });
-    })
+    //.catch(error => {
+    //  iziToast.error({
+    //    message: 'Something went wrong. Please try again later.',
+    //    position: 'topRight',
+    //  });
+    //})
     .finally(() => {
         hideLoader();
     });
