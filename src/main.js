@@ -10,7 +10,6 @@ import {
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-
 const form = document.querySelector('.form');
 const searchInput = document.querySelector('.search-input');
 
@@ -30,11 +29,10 @@ function handleSubmit(event) {
     return;
   }
 
-
   clearGallery();
-    showLoader();
-    
-    getImagesByQuery(myInput)
+  showLoader();
+
+  getImagesByQuery(myInput)
     .then(data => {
       if (data.hits.length === 0) {
         iziToast.info({
@@ -43,18 +41,15 @@ function handleSubmit(event) {
         });
       } else {
         createGallery(data.hits);
-
-        const lightbox = new SimpleLightbox('.gallery a');
-        lightbox.refresh();
       }
     })
-    //.catch(error => {
-    //  iziToast.error({
-    //    message: 'Something went wrong. Please try again later.',
-    //    position: 'topRight',
-    //  });
-    //})
+    .catch(error => {
+      iziToast.error({
+        message: 'Something went wrong. Please try again later.',
+        position: 'topRight',
+      });
+    })
     .finally(() => {
-        hideLoader();
+      hideLoader();
     });
 }
